@@ -1,0 +1,65 @@
+<h4>Formularios <small>data</small></h4>
+<hr />
+<form [formGroup]="forma" (ngSubmit)="guardarCambios()">
+
+    <div formGroupName="nombreCompleto">
+
+        <div class="form-group row" [ngClass]="{ error_red: forma.controls['nombreCompleto'].controls['nombre'].invalid }">
+            <label class="col-2 col-form-label">Nombre</label>
+            <div class="col-8">
+
+                <input [ngClass]="{ error_red_input: forma.get('nombreCompleto').get('nombre').invalid }" class="form-control" type="text" placeholder="Nombre" formControlName="nombre" />
+
+                <div *ngIf="forma.controls['nombreCompleto'].controls['nombre'].hasError('required')">
+                    El nombre es necesario.
+                </div>
+
+                <div *ngIf="forma.controls['nombreCompleto'].controls('nombre').hasError('minlength')">
+                    Necesitas por lo menos 5 caracteres
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group row" [ngClass]="{ error_red: forma.controls['nombreCompleto'].controls['apellido'].invalid }">
+            <label class=" col-2 col-form-label ">Apellido</label>
+            <div class="col-8 ">
+
+                <input [ngClass]="{ error_red_input: forma.get('nombreCompleto').get('nombre').invalid }" class="form-control " type="text " placeholder="Apellido " formControlName="apellido " />
+
+                <div *ngIf="forma.controls['nombreCompleto'].controls['nombre'].hasError('required')">
+                    El nombre es necesario.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- [ngClass]="{ error_red: !forma.get( 'correo').valid } " -->
+
+    <div class="form-group row " [ngClass]="{ error_red: forma.get( 'correo').invalid } ">
+        <label class=" col-2 col-form-label ">Correo</label>
+        <div class="col-md-8 ">
+
+            <!-- [ngClass]="{ error_red_input: !forma.get( 'correo').valid } " -->
+
+            <input [ngClass]="{ error_red_input: forma.get( 'correo').invalid }" class=" form-control " type="email " placeholder="Correo electrónico " formControlName="correo " />
+
+            <div *ngIf="forma.controls[ 'correo'].errors?.required ">
+                Es necesario introducir un correo
+            </div>
+
+            <div *ngIf="forma.controls[ 'correo'].errors?.pattern ">
+                Escribe el correo en un formato correcto
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group row ">
+        <label class="col-2 col-form-label ">&nbsp;</label>
+        <div class="input-group col-md-8 ">
+            <button type="submit " class="btn btn-outline-primary ">Guardar</button>
+        </div>
+    </div>
+</form>
